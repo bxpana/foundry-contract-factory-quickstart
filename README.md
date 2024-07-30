@@ -1,86 +1,23 @@
-## Foundry
+https://docs.zksync.io/build/zksync-101/contract-factory
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+`forge build --zksync` works:
+```
+[⠃] Using zksolc-1.5.1
+[⠊] Compiling (zksync)
+[⠔] Compiling 22 files with ZkSolc 0.8.24
+[⠒] ZkSolc 0.8.24 finished in 6.67s
+Compiler run successful!
 ```
 
-### Test
+`forge create src/CrowdfundFactory.sol:CrowdfundingFactory --factory-deps src/CrowdfundingCampaign.sol:CrowdfundingCampaign --account myKeystore --sender 0x8Ee042243f2d2ce5EFBEa796fE9e11e78B95Fdf1 --rpc-url zkSyncSepoliaTestnet --chain 300 --zksync`
+Does not work, gives me:
+```
+error: unexpected argument '--factory-deps' found
 
-```shell
-$ forge test
+  tip: a similar argument exists: '--force'
+
+Usage: forge create --force <CONTRACT>
+
+For more information, try '--help'.
 ```
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Private key setup
-
-It's recommended to use Foundry keystore to store your development account private key.
-
-1. Export your account private key.
-2. Create a keystore and import your private key by running:
-
-```shell
-cast wallet import myKeystore --interactive
-# enter your PK when prompted and provide a password
-```
-
-> Note that the name `myKeystore` is arbitrary and can be updated. If you decide to use another name, be sure to reference it when using `cast`.
-
-This will return an address (keystore address), **copy it for later use**.
-
-#### Using the keystore
-
-When running commands that require a private key, like `forge create` or `cast send`, use `--account myKeystore --sender <KEYSTORE_ADDRESS>`. This will require you to enter the keystore password you provided before.
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --account myKeystore --sender <KEYSTORE_ADDRESS>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
