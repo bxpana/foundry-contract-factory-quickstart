@@ -22,3 +22,20 @@ Usage: forge create --force <CONTRACT>
 For more information, try '--help'.
 ```
 
+there is no need to pass `--factory-deps` anymore, but tried:
+
+```
+forge create src/CrowdfundFactory.sol:CrowdfundingFactory --account myKeystore --sender 0x8Ee042243f2d2ce5EFBEa796fE9e11e78B95Fdf1 --rpc-url zkSyncSepoliaTestnet --chain 300 --zksync
+```
+
+and got:
+
+```
+error: unexpected argument '--sender' found
+
+  tip: a similar argument exists: '--ledger'
+
+Usage: forge create --account <ACCOUNT_NAME> --ledger <CONTRACT>
+
+For more information, try '--help'.
+```
